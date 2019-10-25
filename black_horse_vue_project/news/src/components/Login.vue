@@ -49,7 +49,7 @@ export default {
     height: 200px;
     position: fixed;
     top:100px;
-    left:50px;
+    left:80px;
     
 }
 .inputs{
@@ -66,7 +66,7 @@ input{
     border-bottom: 1px solid #333;
     background: #dedede;
     margin-top:20px;
-    margin-left:-55px;
+    margin-left:15px;
    padding-bottom: 5px;
    
 }
@@ -79,7 +79,7 @@ img{
     color:#fff;
     line-height: 40px;
     border-radius: 25px;
-    margin:49px;
+    margin:85px;
 }
 .buttons{
     width: 375px;height: 40px;
