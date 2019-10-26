@@ -7,10 +7,22 @@
       <span class="iconfont iconnew"></span>
     </div>
     <div class="userInput">
-      <authinput type="text" placeholder="请输入手机号" rule="^\d{4,16}$" @input="setUserName" err_message="请输入正确的手机号"></authinput>
+      <authinput
+        type="text"
+        placeholder="请输入手机号"
+        rule="^\d{4,16}$"
+        @input="setUserName"
+        err_message="请输入正确的手机号"
+      ></authinput>
     </div>
     <div class="passInput">
-      <authinput type="password" placeholder="请输入密码" rule="^\d{3,16}$" @input="setPwd" err_message="请输入正确的密码"></authinput>
+      <authinput
+        type="password"
+        placeholder="请输入密码"
+        rule="^\d{3,16}$"
+        @input="setPwd"
+        err_message="请输入正确的密码"
+      ></authinput>
     </div>
     <div class="btn">
       <botton text="登录" @send="sendLogin"></botton>
@@ -31,40 +43,45 @@ export default {
     authinput: authinput,
     botton: botton
   },
-  data(){
-      return{
-          username:'',
-          userpwd:''
-      }
+  data() {
+    return {
+      username: "",
+      userpwd: ""
+    };
   },
-  methods:{
-      setUserName(name){
-          this.username=name;
-      },
-      setPwd(pwd){
-          this.userpwd=pwd;
-      },
-      sendLogin(){
-        //   ajax请求
-    this.$axios({
-        url:'http://127.0.0.1:3000/login',
-        method:'post',
-        data:{
-            username:this.username,
-            password:this.userpwd
+  methods: {
+    setUserName(name) {
+      this.username = name;
+    },
+    setPwd(pwd) {
+      this.userpwd = pwd;
+    },
+    sendLogin() {
+      //   ajax请求
+      this.$axios({
+        url: "/login",
+        method: "post",
+        data: {
+          username: this.username,
+          password: this.userpwd
         }
-    }).then(res=>{
-        if (res.data.statusCode && res.data.statusCode == 401) {
-                    this.$toast.fail(res.data.message)
-                }else {
-                    this.$toast.success(res.data.message)
-                }
-        
-    })
-
-      }
-  },
-
+      }).then(res => {
+        if (!res.data.statusCode) {
+          // 保存数据
+          localStorage.setItem("token", res.data.data.token);
+          localStorage.setItem("user_id", res.data.data.user.id);
+          // 然后弹出提示框
+          this.$toast.success(res.data.message);
+          // 设置定时跳转
+          setTimeout(() => {
+            this.$router.push({
+              path: "/"
+            });
+          }, 1000);
+        }
+      });
+    }
+  }
 };
 </script>
 
@@ -86,11 +103,11 @@ export default {
     color: red;
   }
 }
-.sengqing{
-    text-align: center;
-    margin-top:13.889vw;
-    .red{
-        color:red;
-    }
+.sengqing {
+  text-align: center;
+  margin-top: 13.889vw;
+  .red {
+    color: red;
+  }
 }
 </style>

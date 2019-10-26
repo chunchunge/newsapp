@@ -5,14 +5,41 @@ import App from './App'
 import router from './router'
 
 //引入组件库
-import Vant from 'vant';
+import Vant, { Lazyload } from 'vant';
 //注册组件库
 Vue.use(Vant);
 //引入组件样式文件
 import 'vant/lib/index.css';
 
 import axios from "axios";
+router.beforeEach((to,from,next)=>{
+  var token =localStorage.getItem('token')
+  if(to.path=="/profile"){
+    if(token){
+      next();
+    }else{
+      next('/login')
+    }
+  }else{
+    next();
+  }
+ 
+});
+// 错误拦截
+axios.defaults.baseUrl="http://127.0.0.1:3000"
+import {Toast} from 'vant';
+axios.interceptors.response.use((res)=>{
+  const {message,statusCode} =res.data;
+  if(message && statusCode ==401){
+    Toast.fail(message)
+  }
+if(message=="用户信息验证失败"){
+  router.push('./login')
+}
 
+
+  return (res);
+})
 // 绑定到原型
 Vue.prototype.$axios = axios;
 
