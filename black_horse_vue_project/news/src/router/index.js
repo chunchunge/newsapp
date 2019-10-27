@@ -5,6 +5,7 @@ import Register from '@/pages/Register'
 import Profile from '@/pages/Profile'
 import EditFile from '@/pages/EditFile'
 import Home from '@/pages/Home'
+import Attention from '@/pages/Attention'
 Vue.use(Router)
 
 export default new Router({
@@ -34,6 +35,11 @@ export default new Router({
       path:'/editfile',
       name:'editfilepage',
       component:EditFile
+    },
+    {
+      path:'/attention',
+      name:'attentionpage',
+      component:Attention
     }
   ]
 })

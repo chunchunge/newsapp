@@ -1,17 +1,19 @@
 <template>
   <div>
     <div class="heard">
-      <span class="iconfont iconjiantou2"></span>
-      <div class="tital">编辑资料</div>
+      <span class="iconfont iconjiantou2"  @click="$router.back()"></span>
+      <div class="tital">{{labels}}</div>
     </div>
-    <div class="img">
-      <img class="imgs" src="../assets/images/capture_20191015202843328.jpg" alt />
-    </div>
+    
   </div>
 </template>
 
 <script>
-export default {};
+export default {
+  props:[
+    'labels'
+  ]
+};
 </script>
 
 <style lang="less" scoped>
@@ -29,12 +31,5 @@ export default {};
     margin-right: 5.556vw;
   }
 }
-.img {
-  text-align: center;
-  padding:5.556vw 0;
-  .imgs {
-    width: 20.833vw;
-    border-radius: 50%;
-  }
-}
+
 </style>

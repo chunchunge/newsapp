@@ -14,7 +14,7 @@
     
     <span class="iconfont iconjiantou1"></span>
     </div>
-    <profiled  label="我的关注"  desl="关注的用户" @jump="jumpPage"/>
+    <profiled  label="我的关注"  desl="关注的用户" @jump="attentionss"/>
     <profiled  label="我的跟帖"  desl="跟帖/回复" @jump="jumpPage"/>
     <profiled  label="我的收藏"  desl="文章/视频" @jump="jumpPage"/>
     <profiled  label="设置"  @jump="efitProfile"/>
@@ -52,6 +52,11 @@ export default {
       efitProfile(){
         this.$router.push({
           path:'./EditFile'
+        })
+      },
+      attentionss(){
+        this.$router.push({
+          path:'./attention'
         })
       }
     },
