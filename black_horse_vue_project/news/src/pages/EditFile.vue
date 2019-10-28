@@ -107,7 +107,7 @@ export default {
         data:data,
         
       }).then(res => {
-        console.log(res.data);
+        // console.log(res.data);
         
         //调用前面的函数修改url
         this.editProfile({

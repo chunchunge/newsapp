@@ -7,7 +7,7 @@
       {{item.nickname}}
       <div class="times">2019-10-10</div>
     </div>
-    <div class="right">取消关注</div>
+    <div class="right"  @click="cancelFollow(item.id)">取消关注</div>
   </div>
   </div>
 </template>
@@ -23,18 +23,18 @@ export default {
         myFollows:[]
       }
     },
-    // 当页面加载完成之后发送ajax请求
-    mounted(){
-      // 获取数据
+    methods:{
+      loadPage(){
+         // 获取数据
       this.$axios({
         url:'/user_follows',
         method:'get',
       }).then(res=>{
-        console.log(res.data);
+        // console.log(res.data);
         
         // 将数据存在data里面
         this.myFollows=res.data.data;
-        // 遍历这个数组
+         // 遍历这个数组
         this.myFollows.forEach(element => {
           // 如果有头像就拼进去没有的话就强制给他一个
           if(!element.head_img){
@@ -43,7 +43,25 @@ export default {
             element.head_img=this.$axios.defaults.baseURL+element.head_img
           }
         });
+      
+       })
+    },
+    cancelFollow(id){
+      // 拿到id之后发送ajax请求
+      this.$axios({
+        url:'/user_unfollow/'+id,
+        method:'get'
+      }).then(res=>{
+        // 取关成功然后刷新页面
+          this.loadPage();
       })
+    }
+    },
+    // 当页面加载完成之后发送ajax请求
+    mounted(){
+     this.loadPage();
+       
+     
     }
 }
 </script>
