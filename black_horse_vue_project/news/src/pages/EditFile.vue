@@ -4,9 +4,13 @@
     <div class="img">
       <img class="imgs" :src="profile.head_img" alt />
     </div>
-    <profiled label="昵称" :desl="profile.nickname" />
+    <profiled label="昵称" :desl="profile.nickname" @jump="isShowNickname = true" />
     <profiled label="密码" desl="******" />
     <profiled label="性别" :desl="profile.gender" />
+
+    <van-dialog v-model="isShowNickname" title="编辑昵称" show-cancel-button @confirm="editProfile">
+      <van-field v-model="newNickname" placeholder="请输入昵称" />
+    </van-dialog>
   </div>
 </template>
 
@@ -20,12 +24,15 @@ export default {
   },
   data() {
     return {
+      isShowNickname: false,
+      newNickname: "",
       profile: {}
     };
   },
-  mounted() {
-    // 当页面加载完发送ajax请求
-    this.$axios({
+  methods: {
+    // 封装ajax请求
+    loadPage(){
+      this.$axios({
       // url后面需要带上用户的id
       url: "/user/" + localStorage.getItem("user_id"),
       method: "get",
@@ -46,6 +53,29 @@ export default {
       }
       this.profile.gender = this.profile.gender == 0 ? "小姐姐" : "小哥哥";
     });
+  
+    },
+    editProfile() {
+      // ajax请求
+      this.$axios({
+        url: "/user_update/" + localStorage.getItem("user_id"),
+        method: "post",
+        headers: {
+          Authorization: localStorage.getItem("token")
+        },
+        data: {
+          nickname: this.newNickname
+        }
+      }).then(res => {
+        this.loadPage();
+      });
+      
+    }
+  },
+  mounted() {
+    // 当页面加载完发送ajax请求
+        this.loadPage();
+
   }
 };
 </script>
