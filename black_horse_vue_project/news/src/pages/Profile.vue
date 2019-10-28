@@ -2,8 +2,9 @@
   <div class="profiles">
     <div class="top" @click="efitProfile">
     <div class="left">
-      <img v-if="!profile.head_img" class="imgs" src="@/assets/images/capture_20191015202843328.jpg" alt="">
-       <img v-else class="imgs" :src="'http://127.0.0.1:3000'+profile.head_img" alt="">
+      <!-- <img v-if="!profile.head_img" class="imgs" src="@/assets/images/capture_20191015202843328.jpg" alt="">
+       <img v-else class="imgs" :src="'http://127.0.0.1:3000'+profile.head_img" alt=""> -->
+       <img :src="profile.head_img" class="imgs" alt="">
     </div>
     <div class="right">
       <span v-if="profile.gender == 1" class="iconfont iconxingbienan"></span>
@@ -74,6 +75,11 @@ export default {
             // 我们想要的数据都在 res.data.data 里面
             // 将这些数据存放到 这个组件得 data 里面的 profile 字段中
             this.profile = res.data.data;
+            if(!this.profile.head_img){
+              this.profile.head_img="../assets/images/capture_20191015202843328.jpg"
+            }else{
+              this.profile.head_img=this.$axios.defaults.baseUrl+this.profile.head_img
+            }
             console.log(this.profile);
             
         })
