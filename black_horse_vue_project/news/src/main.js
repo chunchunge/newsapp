@@ -12,9 +12,15 @@ Vue.use(Vant);
 import 'vant/lib/index.css';
 
 import axios from "axios";
+// 路由守卫
 router.beforeEach((to,from,next)=>{
   var token =localStorage.getItem('token')
-  if(to.path=="/profile"){
+  // if(to.path=="/profile"){
+    const pagesNeedAuth=[
+      '/profile',
+      '/editfile'
+    ]
+    if(pagesNeedAuth.indexOf(to.path) >=0){
     if(token){
       next();
     }else{
