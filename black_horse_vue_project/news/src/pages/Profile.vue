@@ -66,9 +66,7 @@ export default {
       this.$axios({
         url:'/user/'+localStorage.getItem('user_id'),
         method:'get',
-        headers:{
-          Authorization: localStorage.getItem('token')
-        }
+        
       }).then( res => {
             // console.log(res);    
             // 数据获取完毕

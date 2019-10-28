@@ -34,6 +34,16 @@ router.beforeEach((to,from,next)=>{
 // 错误拦截
 axios.defaults.baseUrl="http://127.0.0.1:3000"
 import {Toast} from 'vant';
+// 请求拦截
+axios.interceptors.request.use((config)=>{
+  // 判断有没有带token
+  if(!config.headers.Authorization && localStorage.getItem('token')){
+    // 没有就强制加上去
+    config.headers.Authorization = localStorage.getItem('token')
+  }
+  // 有的话就让你返回
+  return config;
+})
 axios.interceptors.response.use((res)=>{
   const {message,statusCode} =res.data;
   if(message && statusCode ==401){

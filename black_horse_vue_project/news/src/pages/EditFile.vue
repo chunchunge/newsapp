@@ -20,7 +20,7 @@
     <!-- 编辑密码 -->
     <van-dialog
       v-model="isShowPwd"
-      title="编辑昵称"
+      title="编辑密码"
       show-cancel-button
       @confirm="editProfile({password:newPwd})"
     >
@@ -74,10 +74,7 @@ export default {
         // url后面需要带上用户的id
         url: "/user/" + localStorage.getItem("user_id"),
         method: "get",
-        headers: {
-          // 验证用户登录状态
-          Authorization: localStorage.getItem("token")
-        }
+       
       }).then(res => {
         // 将请求得到的数据保存在data里面
         this.profile = res.data.data;
@@ -108,9 +105,7 @@ export default {
         url: "/upload",
         method: "post",
         data:data,
-        headers: {
-          Authorization: localStorage.getItem("token")
-        }
+        
       }).then(res => {
         console.log(res.data);
         
@@ -126,9 +121,7 @@ export default {
       this.$axios({
         url: "/user_update/" + localStorage.getItem("user_id"),
         method: "post",
-        headers: {
-          Authorization: localStorage.getItem("token")
-        },
+       
         data: newData
       }).then(res => {
         // 刷新页面
