@@ -6,6 +6,7 @@ import Profile from '@/pages/Profile'
 import EditFile from '@/pages/EditFile'
 import Home from '@/pages/Home'
 import Attention from '@/pages/Attention'
+import MyComments from '@/pages/MyComments'
 Vue.use(Router)
 
 export default new Router({
@@ -40,6 +41,11 @@ export default new Router({
       path:'/attention',
       name:'attentionpage',
       component:Attention
+    },
+    {
+      path:'/mycomments',
+      name:'mycommentspage',
+      component:MyComments
     }
   ]
 })
