@@ -5,12 +5,26 @@
       <img class="imgs" :src="profile.head_img" alt />
     </div>
     <profiled label="昵称" :desl="profile.nickname" @jump="isShowNickname = true" />
-    <profiled label="密码" desl="******" />
-    <profiled label="性别" :desl="profile.gender" />
-
-    <van-dialog v-model="isShowNickname" title="编辑昵称" show-cancel-button @confirm="editProfile">
+    <profiled label="密码" desl="******" @jump="isShowPwd = true"/>
+    <profiled label="性别" :desl="profile.gender"  @jump="isShowGender=true"/>
+<!-- 编辑昵称 -->
+    <van-dialog v-model="isShowNickname" title="编辑昵称" show-cancel-button @confirm="editProfile({nickname:newNickname})">
       <van-field v-model="newNickname" placeholder="请输入昵称" />
     </van-dialog>
+    <!-- 编辑密码 -->
+    <van-dialog v-model="isShowPwd" title="编辑昵称" show-cancel-button @confirm="editProfile({password:newPwd})">
+      <van-field typ v-model="newPwd" placeholder="请输入密码" />
+    </van-dialog>
+    <!-- 更改性别 -->
+ <!-- 上拉菜单组件 -->
+        <!-- v-model 是否显示
+        actions 是一个数组,存放着所有选项
+        selectt 是选择后的回调函数处理 -->
+        <van-action-sheet
+        v-model="isShowGender"
+        :actions="genderList"
+        @select="selectGender"
+        cancel-text="取消"/>
   </div>
 </template>
 
@@ -25,7 +39,18 @@ export default {
   data() {
     return {
       isShowNickname: false,
+      isShowPwd:false,
+      isShowGender:false,
+      genderList:[
+        {
+          name:'男'
+        },
+        {
+          name:'女'
+        }
+      ],
       newNickname: "",
+      newPwd:"",
       profile: {}
     };
   },
@@ -55,7 +80,13 @@ export default {
     });
   
     },
-    editProfile() {
+    selectGender(item){
+        this.editProfile({
+          gender:item.name=='男'?1:0
+        })
+        this.isShowGender=false;
+    },
+    editProfile(newData) {
       // ajax请求
       this.$axios({
         url: "/user_update/" + localStorage.getItem("user_id"),
@@ -63,9 +94,7 @@ export default {
         headers: {
           Authorization: localStorage.getItem("token")
         },
-        data: {
-          nickname: this.newNickname
-        }
+        data:newData
       }).then(res => {
         this.loadPage();
       });
