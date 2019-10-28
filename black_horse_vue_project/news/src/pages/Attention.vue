@@ -1,10 +1,10 @@
 <template>
   <div>
   <editherd labels="我的关注"/>
-   <div class="guanZhu">
-    <div class="left"></div>
+   <div class="guanZhu" v-for="item in myFollows" :key="item.id">
+    <img class="left" :src="item.head_img" alt="">
     <div class="banner">
-      火星新闻播报
+      {{item.nickname}}
       <div class="times">2019-10-10</div>
     </div>
     <div class="right">取消关注</div>
@@ -14,10 +14,36 @@
 
 <script>
 import editherd from "../components/editherd"
-
 export default {
     components:{
         editherd:editherd
+    },
+    data(){
+      return {
+        myFollows:[]
+      }
+    },
+    // 当页面加载完成之后发送ajax请求
+    mounted(){
+      // 获取数据
+      this.$axios({
+        url:'/user_follows',
+        method:'get',
+      }).then(res=>{
+        console.log(res.data);
+        
+        // 将数据存在data里面
+        this.myFollows=res.data.data;
+        // 遍历这个数组
+        this.myFollows.forEach(element => {
+          // 如果有头像就拼进去没有的话就强制给他一个
+          if(!element.head_img){
+            element.head_img="../assets/images/capture_20191015202843328.jpg"
+          }else{
+            element.head_img=this.$axios.defaults.baseURL+element.head_img
+          }
+        });
+      })
     }
 }
 </script>
