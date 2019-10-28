@@ -7,6 +7,7 @@ import EditFile from '@/pages/EditFile'
 import Home from '@/pages/Home'
 import Attention from '@/pages/Attention'
 import MyComments from '@/pages/MyComments'
+import Collect from '@/pages/Collect'
 Vue.use(Router)
 
 export default new Router({
@@ -46,6 +47,11 @@ export default new Router({
       path:'/mycomments',
       name:'mycommentspage',
       component:MyComments
+    },
+    {
+      path:'/collect',
+      name:'collectpage',
+      component:Collect
     }
   ]
 })

@@ -17,7 +17,7 @@
     </div>
     <profiled  label="我的关注"  desl="关注的用户" @jump="attentionss"/>
     <profiled  label="我的跟帖"  desl="跟帖/回复" @jump="mycomments"/>
-    <profiled  label="我的收藏"  desl="文章/视频" @jump="jumpPage"/>
+    <profiled  label="我的收藏"  desl="文章/视频" @jump="collects"/>
     <profiled  label="设置"  @jump="efitProfile"/>
     <profiled  label="退出登录"  @jump="logOut"/>
 
@@ -63,6 +63,11 @@ export default {
       mycomments(){
         this.$router.push({
           path:'./mycomments'
+        })
+      },
+      collects(){
+        this.$router.push({
+          path:'./collect'
         })
       }
     },
