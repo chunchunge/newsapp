@@ -1,49 +1,22 @@
 <template>
   <div>
     <editherd labels="我的收藏"></editherd>
-    <div v-for="item in collectiionList" :key="item.id">
-      <div class="list1" v-if="item.cover.length == 1">
-        <div class="left">
-          <div class="top">{{item.title}}</div>
-          <div class="botton">
-            <span class="lefts">{{item.user.nickname}}</span>
-            <span class="rights">{{item.comments.length}}跟帖</span>
-          </div>
-        </div>
-        <img :src="item.cover[0].url" alt />
-      </div>
-      <div class="list2" v-else>
-        <div class="top">{{item.title}}</div>
-        <div class="pics">
-          <div class="imgWrapper">
-            <img :src="item.cover[0].url" alt />
-          </div>
-          <div class="imgWrapper">
-            <img :src="item.cover[1].url" alt />
-          </div>
-          <div class="imgWrapper">
-            <img :src="item.cover[2].url" alt />
-          </div>
-        </div>
-
-        <div class="botton">
-          <span class="lefts">{{item.user.nickname}}</span>
-          <span class="rights">{{item.comments.length}}跟帖</span>
-        </div>
-      </div>
-    </div>
+    <post :post="item" v-for="(item,index) in collectionList" :key="index"></post>
   </div>
 </template>
 
 <script>
 import editherd from "../components/editherd";
+import post from "../components/post";
+
 export default {
   components: {
-    editherd: editherd
+    editherd,
+    post
   },
   data() {
     return {
-      collectiionList: []
+      collectionList: []
     };
   },
   mounted() {
@@ -51,67 +24,25 @@ export default {
       url: "/user_star",
       method: "get"
     }).then(res => {
-      this.collectiionList = res.data.data;
+      this.collectionList = res.data.data;
+      this.collectionList.forEach(element => {
+        element.comment_length = element.comments.length;
+        if (element.cover) {
+          element.cover.forEach(element => {
+            //    如果这个图片开头带上了 htttp 我们就知道他是一张普通图片,无需拼接
+            // 如果这里没有 http 这个字符串 我们就认为这个图片需要拼接
+            if (element.url.indexOf("http") < 0) {
+              // 如果没有 http 这个字符串
+              element.url = this.$axios.defaults.baseURL + element.url;
+            }
+          });
+        }
+      });
     });
   }
 };
 </script>
 
+
 <style lang="less" scoped>
-.list1 {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 2.778vw 2.778vw;
-  border-bottom: 1px solid #eee;
-}
-
-img {
-  width: 33vw;
-  height: 23.556vw;
-  object-fit: cover;
-}
-
-.left {
-  .top {
-    display: -webkit-box;
-    -webkit-box-orient: vertical;
-    -webkit-line-clamp: 2;
-    overflow: hidden;
-    margin-bottom: 4.167vw;
-  }
-
-  height: 23.556vw;
-  padding-right: 2.778vw;
-  flex: 1;
-  align-content: space-between;
-
-  .botton {
-    font-size: 3.333vw;
-
-    color: #999;
-  }
-}
-.list2 {
-  padding: 5.556vw;
-  border-bottom: 1px solid #eee;
-  .botton {
-    font-size: 3.333vw;
-    color: #999;
-  }
-  .pics {
-    margin-top: 10px;
-    display: flex;
-    justify-content: space-between;
-    .imgWrapper {
-      width: 32%;
-      height: 20.556vw;
-      overflow: hidden;
-      img {
-        width: 100%;
-        height: auto;
-      }
-    }
-  }
-}
 </style>
