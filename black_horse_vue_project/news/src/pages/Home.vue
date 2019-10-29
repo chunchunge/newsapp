@@ -2,13 +2,8 @@
   <div>
     <homes />
     <van-tabs v-model="activeTab">
-      <van-tab
-        v-for="(tabItem,index) in tabList"
-        :key="index"
-        :title="tabItem.name">
-        <div v-for="(post,index) in tabItem.posts" :key="index">
-          {{post.title}}
-        </div>
+      <van-tab v-for="(tabItem,index) in tabList" :key="index" :title="tabItem.name">
+        <post :post="post" v-for="(post,index) in tabItem.posts" :key="index"></post>
       </van-tab>
     </van-tabs>
   </div>
@@ -16,9 +11,11 @@
 
 <script>
 import homes from "../components/homes";
+import post from '../components/post';
 export default {
   components: {
-    homes
+    homes,
+    post
   },
   data() {
     return {
@@ -64,12 +61,12 @@ export default {
       });
     }
   },
-  watch:{
+  watch: {
     // 监听分类的修改
-    activeTab(newActiveTab){
+    activeTab(newActiveTab) {
       //没次切换分类都要重新发起ajax请求
       // 但是已经发过的已经存起来了所以先判断先前是否得到过数据
-      if(this.tabList[newActiveTab].posts.length==0){
+      if (this.tabList[newActiveTab].posts.length == 0) {
         // 如果这个分类里面的posts长度为0就证明没有
         this.getTabPosts(newActiveTab);
       }
