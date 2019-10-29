@@ -1,12 +1,15 @@
 <template>
   <div>
-      <router-link to="/profile">个人中心</router-link>
+      <homes/>
   </div>
 </template>
 
 <script>
+import homes from "../components/homes"
 export default {
-
+  components:{
+    homes
+  }
 }
 </script>
 
