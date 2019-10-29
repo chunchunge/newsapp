@@ -1,5 +1,5 @@
 <template>
-  <div class="hearder">
+  <div class="hearder" >
     <span class="iconfont iconnew"></span>
     <div class="middle">
         <div class="search">
