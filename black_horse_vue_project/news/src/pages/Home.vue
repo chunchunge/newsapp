@@ -63,6 +63,17 @@ export default {
         this.tabList[tabIndex].posts = data;
       });
     }
+  },
+  watch:{
+    // 监听分类的修改
+    activeTab(newActiveTab){
+      //没次切换分类都要重新发起ajax请求
+      // 但是已经发过的已经存起来了所以先判断先前是否得到过数据
+      if(this.tabList[newActiveTab].posts.length==0){
+        // 如果这个分类里面的posts长度为0就证明没有
+        this.getTabPosts(newActiveTab);
+      }
+    }
   }
 };
 </script>
