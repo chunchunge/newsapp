@@ -3,8 +3,8 @@
     <div class="foot" v-if="!isFocus">
     <input type="text" placeholder="写跟帖" @focus="showArea" />
     <div class="right">
-      <div class="num">1020</div>
-      <span class="iconfont iconpinglun-"></span>
+      <div class="num">1122</div>
+      <span class="iconfont iconpinglun-" ></span>
       <span class="iconfont iconshoucang"></span>
        <a href="https://developers.weixin.qq.com/doc/offiaccount/Getting_Started/Explanation_of_interface_privileges.html">
       <span class="iconfont iconfenxiang"></span>
@@ -23,6 +23,9 @@
 
 <script>
 export default {
+  props:[
+    'post'
+  ],
    data(){
        return{
            isFocus:false
@@ -105,5 +108,8 @@ textarea{
     border-radius: 277.778vw;
     margin-top: 5.556vw;
 
+}
+.red {
+    color: red;
 }
 </style>

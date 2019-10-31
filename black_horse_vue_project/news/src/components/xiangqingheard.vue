@@ -8,7 +8,7 @@
         <span class="iconfont iconnew"></span>
       </div>
     </div>
-    <div class="right red" v-if="!post.has_follow"  @click="follow">关注</div>
+    <div class="right reds" v-if="!post.has_follow"  @click="follow">关注</div>
     <div class="rights" v-else-if="post.has_follow" @click="unfollow">已关注</div>
   </div>
 </template>
@@ -87,7 +87,7 @@ export default {
   line-height: 4vw;
   padding: 1.111vw 3.333vw;
 }
-.red{
+.reds{
   background: red;
 }
 </style>
