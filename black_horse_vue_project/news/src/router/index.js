@@ -8,6 +8,7 @@ import Home from '@/pages/Home'
 import Attention from '@/pages/Attention'
 import MyComments from '@/pages/MyComments'
 import Collect from '@/pages/Collect'
+import Xiangqing from '@/pages/Xiangqing'
 Vue.use(Router)
 
 export default new Router({
@@ -52,6 +53,11 @@ export default new Router({
       path:'/collect',
       name:'collectpage',
       component:Collect
+    },
+    {
+      path:'/xiangqing',
+      name:'xiangqingpage',
+      component:Xiangqing
     }
   ]
 })

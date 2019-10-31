@@ -1,7 +1,9 @@
 <template>
   <div>
     <div class="videoPost" v-if="post.type==2">
-      <div class="title">{{post.title}}</div>
+      <router-link to="/xiangqing">
+        <div class="title">{{post.title}}</div>
+      </router-link>
       <div class="cover">
         <img :src="post.cover[0].url" class="coverImg" alt />
         <div class="btnWrapper">
@@ -12,18 +14,26 @@
     </div>
     <div class="singleImgPost" v-else-if="post.cover.length>0&&post.cover.length<3">
       <div class="left">
-        <div class="title">{{post.title}}</div>
+        <router-link to="/xiangqing">
+          <div class="title">{{post.title}}</div>
+        </router-link>
         <div class="info">{{post.user.nickname}} {{post.comment_length}}跟帖</div>
       </div>
+        <router-link to="/xiangqing">
       <img :src="post.cover[0].url" class="imgRight" alt />
+        </router-link>
     </div>
     <div class="multipImgPost" v-else-if="post.cover.length>=3">
+      <router-link to="/xiangqing">
       <div class="title">{{post.title}}</div>
-      <div class="covers">
-        <img :src="post.cover[0].url" class="coverImg" alt />
-        <img :src="post.cover[1].url" class="coverImg" alt />
-        <img :src="post.cover[2].url" class="coverImg" alt />
-      </div>
+      </router-link>
+      <router-link to="/xiangqing">
+        <div class="covers">
+          <img :src="post.cover[0].url" class="coverImg" alt />
+          <img :src="post.cover[1].url" class="coverImg" alt />
+          <img :src="post.cover[2].url" class="coverImg" alt />
+        </div>
+      </router-link>
       <div class="info">{{post.user.nickname}} {{post.comment_length}}跟帖</div>
     </div>
   </div>
