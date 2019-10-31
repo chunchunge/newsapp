@@ -1,10 +1,9 @@
 <template>
   <div>
     <div class="videoPost" v-if="post.type==2">
-      <router-link to="/xiangqing">
-        <div class="title">{{post.title}}</div>
-      </router-link>
-      <div class="cover">
+      <div class="title" @click="toDetail">{{post.title}}</div>
+
+      <div class="cover" @click="toDetail">
         <img :src="post.cover[0].url" class="coverImg" alt />
         <div class="btnWrapper">
           <div class="iconfont iconshipin"></div>
@@ -14,26 +13,22 @@
     </div>
     <div class="singleImgPost" v-else-if="post.cover.length>0&&post.cover.length<3">
       <div class="left">
-        <router-link to="/xiangqing">
-          <div class="title">{{post.title}}</div>
-        </router-link>
+        <div class="title" @click="toDetail">{{post.title}}</div>
+
         <div class="info">{{post.user.nickname}} {{post.comment_length}}跟帖</div>
       </div>
-        <router-link to="/xiangqing">
-      <img :src="post.cover[0].url" class="imgRight" alt />
-        </router-link>
+
+      <img :src="post.cover[0].url" @click="toDetail" class="imgRight" alt />
     </div>
     <div class="multipImgPost" v-else-if="post.cover.length>=3">
-      <router-link to="/xiangqing">
-      <div class="title">{{post.title}}</div>
-      </router-link>
-      <router-link to="/xiangqing">
-        <div class="covers">
-          <img :src="post.cover[0].url" class="coverImg" alt />
-          <img :src="post.cover[1].url" class="coverImg" alt />
-          <img :src="post.cover[2].url" class="coverImg" alt />
-        </div>
-      </router-link>
+      <div class="title" @click="toDetail">{{post.title}}</div>
+
+      <div class="covers" @click="toDetail">
+        <img :src="post.cover[0].url" class="coverImg" alt />
+        <img :src="post.cover[1].url" class="coverImg" alt />
+        <img :src="post.cover[2].url" class="coverImg" alt />
+      </div>
+
       <div class="info">{{post.user.nickname}} {{post.comment_length}}跟帖</div>
     </div>
   </div>
@@ -41,7 +36,18 @@
 
 <script>
 export default {
-  props: ["post"]
+  props: ["post"],
+  methods: {
+    toDetail() {
+      // 点点击的时候跳转到详情页并把点击的新闻的id带到$router上
+      this.$router.push({
+           name: 'xiangqingpage',
+        params: {
+          id: this.post.id
+        }
+      });
+    }
+  }
 };
 </script>
 
