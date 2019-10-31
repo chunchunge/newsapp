@@ -5,7 +5,9 @@
     <div class="right">
       <div class="num">1122</div>
       <span class="iconfont iconpinglun-" ></span>
-      <span class="iconfont iconshoucang"></span>
+      <span class="iconfont iconshoucang" :class="{
+                red: post.has_star
+            }" @click="star"></span> 
        <a href="https://developers.weixin.qq.com/doc/offiaccount/Getting_Started/Explanation_of_interface_privileges.html">
       <span class="iconfont iconfenxiang"></span>
        </a>
@@ -40,6 +42,19 @@ export default {
                 // 一般用在这些代码强烈依赖于渲染后的页面状态的那种代码
                 this.$refs.commentArea.focus();
             })
+       },
+       star(){
+         this.$axios({
+           url:'/post_star/'+this.post.id,
+           method:'get'
+         }).then(res=>{
+           const {message}=res.data;
+           if(message=="收藏成功"){
+             this.post.has_star=true
+           }else if(message=="取消成功"){
+             this.post.has_star=false
+           }
+         })
        }
    }
 };
