@@ -6,7 +6,9 @@
       <div class="num">1020</div>
       <span class="iconfont iconpinglun-"></span>
       <span class="iconfont iconshoucang"></span>
+       <a href="https://developers.weixin.qq.com/doc/offiaccount/Getting_Started/Explanation_of_interface_privileges.html">
       <span class="iconfont iconfenxiang"></span>
+       </a>
     </div>
   </div>
     <div class="footer" v-if="isFocus">

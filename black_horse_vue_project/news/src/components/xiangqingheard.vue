@@ -2,18 +2,55 @@
   <div class="heard">
     <div class="left">
       <div class="jiantou">
-        <span class="iconfont iconjiantou2"  @click="$router.back()"></span>
+        <span class="iconfont iconjiantou2" @click="$router.back()"></span>
       </div>
       <div class="new">
         <span class="iconfont iconnew"></span>
       </div>
     </div>
-    <div class="right">已关注</div>
+    <div class="right red" v-if="!post.has_follow"  @click="follow">关注</div>
+    <div class="rights" v-else-if="post.has_follow" @click="unfollow">已关注</div>
   </div>
 </template>
 
 <script>
-export default {};
+export default {
+  props: ["post"],
+  methods: {
+    follow() {
+    
+      
+      // 发送ajax请求关注用户
+      this.$axios({
+         url: '/user_follows/'+this.post.user.id,
+        method: "get"
+      }).then(res => {
+        const { message } = res.data;
+         console.log(message);
+        
+        if (message == "关注成功") {
+          this.post.has_follow = true;
+        }
+      });
+    },
+    unfollow() {
+   
+      
+      this.$axios({
+         url: '/user_unfollow/'+this.post.user.id,
+        method: "get"
+      }).then(res => {
+        const { message } = res.data;
+        
+        
+        if (message == "取消关注成功") {
+          console.log(message);
+          this.post.has_follow = false;
+        }
+      });
+    }
+  }
+};
 </script>
 
 <style lang="less" scoped>
@@ -41,12 +78,16 @@ export default {};
     }
   }
 }
-.right {
+.right,
+.rights {
   font-size: 3.333vw;
   background: #eee;
-  border-radius:10vw;
+  border-radius: 10vw;
   height: 4vw;
   line-height: 4vw;
   padding: 1.111vw 3.333vw;
+}
+.red{
+  background: red;
 }
 </style>

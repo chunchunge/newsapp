@@ -1,6 +1,6 @@
 <template>
   <div>
-    <xiangqingheard />
+    <xiangqingheard :post="post" />
     <div class="mainContent">
         <video 
         src="https://video.pearvideo.com/mp4/adshort/20191031/cont-1617802-14542116_adpkg-ad_hd.mp4 "
