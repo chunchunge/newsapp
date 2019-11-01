@@ -14,8 +14,8 @@
     </div>
   </div>
     <div class="footer" v-if="isFocus">
-        <textarea  class="footers" placeholder="回复：@火星网友1" @blur="isFocus=false"  ref="commentArea"></textarea>
-        <div class="fasong">
+        <textarea  class="footers" v-model="comment" placeholder="回复：@火星网友1" @blur="handleBlur"  ref="commentArea"></textarea>
+        <div class="fasong" @click="send">
             发送
         </div>
     </div>
@@ -30,10 +30,20 @@ export default {
   ],
    data(){
        return{
-           isFocus:false
+           isFocus:false,
+           comment:''
        }
    },
    methods:{
+        handleBlur(){
+            if(!this.comment){
+              this.isFocus=false
+            }
+        },
+        send(){
+          this.comment="";
+          this.isFocus=false;
+        },
        showArea(){
            this.isFocus=true
             this.$nextTick(()=>{

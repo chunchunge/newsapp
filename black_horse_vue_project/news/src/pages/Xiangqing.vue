@@ -27,6 +27,12 @@
         </div>
       </div>
     </div>
+    <div class="geng">
+      <h2 class="litle">精彩跟帖</h2>
+      <div class="tishi">
+          暂无跟帖，抢占沙发
+      </div>
+    </div>
     <xiangqingfoot :post="post" />
   </div>
 </template>
@@ -86,7 +92,7 @@ export default {
 <style lang="less" scoped>
 .mainContent {
   padding: 2.778vw;
-  padding-bottom: 22.222vw;
+  
 }
 .title {
   font-size: 5.556vw;
@@ -96,7 +102,7 @@ export default {
   margin: 5.556vw;
 }
 .content {
-  padding-bottom: 16.667vw;
+
   /deep/ img {
     max-width: 100%;
   }
@@ -108,7 +114,8 @@ export default {
   margin: 5.556vw 0;
   display: flex;
   justify-content: space-around;
-  align-items: center;
+  align-items: center; 
+  
   .like,
   .wechat {
     border: 1px solid #333;
@@ -117,6 +124,7 @@ export default {
     text-align: center;
     border-radius: 4.167vw;
     padding: 0 4.167vw;
+   
     .iconfont {
       margin-right: 3px;
     }
@@ -126,5 +134,21 @@ export default {
       color: #00c800;
     }
   }
+}
+.geng{
+  border-top: 5px solid #dedede;
+  padding-top: 8.333vw;
+    padding-bottom: 16.667vw;
+    .litle{
+      font-weight: normal;
+      font-size: 18px;
+      text-align: center;
+    }
+    .tishi{
+      text-align: center;
+      margin-top:5.556vw;
+      font-size: 14px;
+      color:#888;
+    }
 }
 </style>
