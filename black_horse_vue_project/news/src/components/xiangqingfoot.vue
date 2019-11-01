@@ -3,7 +3,7 @@
     <div class="foot" v-if="!isFocus">
     <input type="text" placeholder="写跟帖" @focus="showArea" />
     <div class="right">
-      <div class="num">1122</div>
+      <div class="num">{{post.comment_length}}</div>
       <span class="iconfont iconpinglun-" ></span>
       <span class="iconfont iconshoucang" :class="{
                 red: post.has_star
