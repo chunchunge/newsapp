@@ -10,6 +10,7 @@ import MyComments from '@/pages/MyComments'
 import Collect from '@/pages/Collect'
 import Xiangqing from '@/pages/Xiangqing'
 import MoreComments from '@/pages/MoreComments.vue'
+import Search from '@/pages/Search.vue'
 Vue.use(Router)
 
 export default new Router({
@@ -64,6 +65,11 @@ export default new Router({
       path: '/morecomments/:id',
       name: 'moreCommentsPage',
       component: MoreComments
+    },
+    {
+      path: '/search',
+      name: 'searchpage',
+      component: Search
     }
   ]
 })

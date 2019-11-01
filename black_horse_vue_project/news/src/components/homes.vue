@@ -2,7 +2,7 @@
   <div class="hearder">
     <span class="iconfont iconnew"></span>
     <div class="middle">
-      <div class="search">
+      <div class="search" @click="search">
         <span class="iconfont iconsearch"></span>
         搜索新闻
       </div>
@@ -14,7 +14,15 @@
 </template>
 
 <script>
-export default {};
+export default {
+  methods:{
+    search(){
+      this.$router.push({
+                path: '/search'
+            })
+    }
+  }
+};
 </script>
 
 <style lang="less" scoped>
