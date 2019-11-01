@@ -1,5 +1,6 @@
 <template>
   <div>
+      <floor v-if="floorItem.parent" :floorItem="floorItem.parent"/>
     <div class="floorWrapper">
       <div class="meta">
         <div class="info">
@@ -14,7 +15,9 @@
 </template>
 
 <script>
+//  <!-- 当我们的 floorItem 有 parent 的时候,就要递归的调用自己,每次都将拿到的 floorItem.parent 传进去,作为下一个 楼层组件得 floorItem -->
 export default {
+     name: 'floor',
     props:[
         "floorItem"
     ]

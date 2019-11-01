@@ -94,7 +94,7 @@ input {
   width: 40.278vw;
 }
 .right {
-  margin-left: 5.556vw;
+  margin-left: 7.556vw;
 }
 .iconfont {
   font-size: 6.389vw;
