@@ -80,7 +80,7 @@ export default {
   position: fixed;
   left: 0;
   bottom: 0;
-  padding: 1.389vw 5.167vw;
+  padding: 1.389vw 4.167vw;
 
 }
 

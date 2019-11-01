@@ -9,18 +9,18 @@
         </div>
         <div class="btnReply">回复</div>
       </div>
-      <commentFloor/>
+      <commentFloor v-if="commentItem.parent" :floorItem="commentItem.parent"/>
       <div class="commentContent">{{commentItem.content}}</div>
     </div>
   </div>
 </template>
 
 <script>
-import commentFloor from './commentFloor'
+import commentFloor from "./commentFloor";
 export default {
-components:{
+  components: {
     commentFloor
-},
+  },
 
   props: ["commentItem"]
 };
@@ -35,7 +35,7 @@ components:{
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
-   margin-bottom: 10px;
+  margin-bottom: 10px;
   .avatar {
     width: 9.722vw;
     height: 9.722vw;
