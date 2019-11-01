@@ -59,7 +59,7 @@ export default {
       postId: this.$route.params.id,
       post: {},
       comments: [],
-      replyActive: false,
+      replyActive: 0,
       replyObj: {}
     };
   },
@@ -82,7 +82,7 @@ export default {
   methods: {
     reply(replyObj) {
       this.replyObj = replyObj;
-      this.replyActive = true;
+      this.replyActive += 1;
     },
     toMoreComments() {
       this.$router.push({
