@@ -29,8 +29,13 @@
     </div>
     <div class="geng">
       <h2 class="litle">精彩跟帖</h2>
-      <div class="tishi">
+      <div class="tishi" v-if="comments.length==0">
           暂无跟帖，抢占沙发
+      </div>
+      <div class="comment" v-else>
+        <div v-for="(item,index) in comments" :key="index">
+          {{item.content}}
+        </div>
       </div>
     </div>
     <xiangqingfoot :post="post" />
@@ -48,7 +53,8 @@ export default {
   data() {
     return {
       postId: this.$route.params.id,
-      post: {}
+      post: {},
+      comments:[]
     };
   },
   mounted() {
@@ -64,8 +70,18 @@ export default {
       this.post = data;
       console.log(this.post);
     });
+    this.getComments();
   },
   methods: {
+    getComments(){
+      this.$axios({
+        url:'/post_comment/'+this.postId,
+        method:'get'
+      }).then(res=>{
+        const {data} =res.data;
+        this.comments=data;
+      })
+    },
     like() {
       // console.log('点击了点赞按钮');
       this.$axios({
