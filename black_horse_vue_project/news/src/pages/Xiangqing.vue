@@ -33,9 +33,9 @@
           暂无跟帖，抢占沙发
       </div>
       <div class="comment" v-else>
-        <div v-for="(item,index) in comments" :key="index">
-          {{item.content}}
-        </div>
+        
+          <comment v-for="(item,index) in comments" :key="index" :commentItem="item"/>
+        
       </div>
     </div>
     <xiangqingfoot :post="post" />
@@ -45,10 +45,12 @@
 <script>
 import xiangqingheard from "../components/xiangqingheard";
 import xiangqingfoot from "../components/xiangqingfoot";
+import comment from "../components/comment";
 export default {
   components: {
     xiangqingheard,
-    xiangqingfoot
+    xiangqingfoot,
+    comment
   },
   data() {
     return {
