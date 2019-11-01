@@ -31,11 +31,13 @@
       <h2 class="litle">精彩跟帖</h2>
       <div class="tishi" v-if="comments.length==0">暂无跟帖，抢占沙发</div>
       <div class="comment" v-else>
-        <comment v-for="(item,index) in comments" :key="index" :commentItem="item" />
+        <comment v-for="(item,index) in comments" :key="index" :commentItem="item" @reply="reply"/>
         <div class="btnMoreComments" @click="toMoreComments">更多跟帖</div>
       </div>
     </div>
-    <xiangqingfoot :post="post" />
+    <xiangqingfoot :post="post"
+            :isActive="replyActive"
+            :replyObj="replyObj"/>
   </div>
 </template>
 
@@ -53,7 +55,9 @@ export default {
     return {
       postId: this.$route.params.id,
       post: {},
-      comments: []
+      comments: [],
+      replyActive:false,
+      replyObj:{}
     };
   },
   mounted() {
@@ -73,6 +77,10 @@ export default {
     this.getComments();
   },
   methods: {
+    reply(replyObj){
+      this.replyObj=replyObj;
+      this.replyActive=true;
+    },
     toMoreComments() {
       this.$router.push({
         name: "moreCommentsPage",

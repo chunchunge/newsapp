@@ -7,7 +7,7 @@
           <div class="name">火星网友</div>
           <div class="time">2小时前</div>
         </div>
-        <div class="btnReply">回复</div>
+        <div class="btnReply" @click="reply">回复</div>
       </div>
       <commentFloor v-if="commentItem.parent" :floorItem="commentItem.parent" :parentLength="parentLength"/>
       <div class="commentContent">{{commentItem.content}}</div>
@@ -35,6 +35,12 @@ export default {
           }else{
               return num;
           }
+      },
+      reply(){
+        // 点击的时候将数据传给子组件
+        this.$emit('reply',{
+          id:this.commentItem.id
+        })
       }
   }
 };
