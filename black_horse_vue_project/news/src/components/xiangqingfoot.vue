@@ -73,13 +73,15 @@ export default {
 <style>
 .foot,
 .footer {
+  background: #666;
   display: flex;
   justify-content: space-between;
   align-items: center;
   position: fixed;
   left: 0;
   bottom: 0;
-  padding: 1.389vw 4.167vw;
+  padding: 1.389vw 5.167vw;
+
 }
 
 input {

@@ -55,7 +55,7 @@ export default new Router({
       component:Collect
     },
     {
-      path:'/xiangqing',
+      path:'/xiangqing/:id',
       name:'xiangqingpage',
       component:Xiangqing
     }
