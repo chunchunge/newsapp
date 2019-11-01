@@ -29,13 +29,10 @@
     </div>
     <div class="geng">
       <h2 class="litle">精彩跟帖</h2>
-      <div class="tishi" v-if="comments.length==0">
-          暂无跟帖，抢占沙发
-      </div>
+      <div class="tishi" v-if="comments.length==0">暂无跟帖，抢占沙发</div>
       <div class="comment" v-else>
-        
-          <comment v-for="(item,index) in comments" :key="index" :commentItem="item"/>
-        
+        <comment v-for="(item,index) in comments" :key="index" :commentItem="item" />
+        <div class="btnMoreComments" @click="toMoreComments">更多跟帖</div>
       </div>
     </div>
     <xiangqingfoot :post="post" />
@@ -56,7 +53,7 @@ export default {
     return {
       postId: this.$route.params.id,
       post: {},
-      comments:[]
+      comments: []
     };
   },
   mounted() {
@@ -66,6 +63,9 @@ export default {
 
     this.$axios({
       url: "/post/" + this.postId,
+      params: {
+        pageSize: 3
+      },
       method: "get"
     }).then(res => {
       const { data } = res.data;
@@ -75,14 +75,22 @@ export default {
     this.getComments();
   },
   methods: {
-    getComments(){
+    toMoreComments() {
+      this.$router.push({
+        name: "moreCommentsPage",
+        params: {
+          id: this.postId
+        }
+      });
+    },
+    getComments() {
       this.$axios({
-        url:'/post_comment/'+this.postId,
-        method:'get'
-      }).then(res=>{
-        const {data} =res.data;
-        this.comments=data;
-      })
+        url: "/post_comment/" + this.postId,
+        method: "get"
+      }).then(res => {
+        const { data } = res.data;
+        this.comments = data;
+      });
     },
     like() {
       // console.log('点击了点赞按钮');
@@ -110,7 +118,6 @@ export default {
 <style lang="less" scoped>
 .mainContent {
   padding: 2.778vw;
-  
 }
 .title {
   font-size: 5.556vw;
@@ -120,7 +127,6 @@ export default {
   margin: 5.556vw;
 }
 .content {
-
   /deep/ img {
     max-width: 100%;
   }
@@ -132,8 +138,8 @@ export default {
   margin: 5.556vw 0;
   display: flex;
   justify-content: space-around;
-  align-items: center; 
-  
+  align-items: center;
+
   .like,
   .wechat {
     border: 1px solid #333;
@@ -142,7 +148,7 @@ export default {
     text-align: center;
     border-radius: 4.167vw;
     padding: 0 4.167vw;
-   
+
     .iconfont {
       margin-right: 3px;
     }
@@ -153,20 +159,29 @@ export default {
     }
   }
 }
-.geng{
+.geng {
   border-top: 5px solid #dedede;
   padding-top: 8.333vw;
-    padding-bottom: 16.667vw;
-    .litle{
-      font-weight: normal;
-      font-size: 18px;
-      text-align: center;
-    }
-    .tishi{
-      text-align: center;
-      margin-top:5.556vw;
-      font-size: 14px;
-      color:#888;
-    }
+  padding-bottom: 16.667vw;
+  .litle {
+    font-weight: normal;
+    font-size: 18px;
+    text-align: center;
+  }
+  .tishi {
+    text-align: center;
+    margin-top: 5.556vw;
+    font-size: 14px;
+    color: #888;
+  }
+}
+.btnMoreComments {
+  height: 8.333vw;
+  line-height: 8.333vw;
+  text-align: center;
+  border: 1px solid #333;
+  width: 33.333vw;
+  border-radius: 4.167vw;
+  margin: 8.333vw auto 0;
 }
 </style>

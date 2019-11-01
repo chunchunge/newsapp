@@ -9,6 +9,7 @@ import Attention from '@/pages/Attention'
 import MyComments from '@/pages/MyComments'
 import Collect from '@/pages/Collect'
 import Xiangqing from '@/pages/Xiangqing'
+import MoreComments from '@/pages/MoreComments.vue'
 Vue.use(Router)
 
 export default new Router({
@@ -58,6 +59,11 @@ export default new Router({
       path:'/xiangqing/:id',
       name:'xiangqingpage',
       component:Xiangqing
+    },
+    {
+      path: '/morecomments/:id',
+      name: 'moreCommentsPage',
+      component: MoreComments
     }
   ]
 })
