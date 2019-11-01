@@ -9,7 +9,7 @@
         </div>
         <div class="btnReply">回复</div>
       </div>
-      <commentFloor v-if="commentItem.parent" :floorItem="commentItem.parent"/>
+      <commentFloor v-if="commentItem.parent" :floorItem="commentItem.parent" :parentLength="parentLength"/>
       <div class="commentContent">{{commentItem.content}}</div>
     </div>
   </div>
@@ -22,7 +22,21 @@ export default {
     commentFloor
   },
 
-  props: ["commentItem"]
+  props: ["commentItem"],
+  data(){
+      return{
+          parentLength:this.countParent(0,this.commentItem)
+      }
+  },
+  methods:{
+      countParent(num,obj){
+          if(obj.parent){
+              return this.countParent(num+1,obj.parent);
+          }else{
+              return num;
+          }
+      }
+  }
 };
 </script>
 

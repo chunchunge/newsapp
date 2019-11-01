@@ -1,10 +1,10 @@
 <template>
   <div>
-      <floor v-if="floorItem.parent" :floorItem="floorItem.parent"/>
+      <floor v-if="floorItem.parent" :floorItem="floorItem.parent" :parentLength="parentLength-1"/>
     <div class="floorWrapper">
       <div class="meta">
         <div class="info">
-         {{floorItem.user.nickname}}
+         {{parentLength}} : {{floorItem.user.nickname}}
           <span class="time">2个小时前</span>
         </div>
         <div class="btnReply">回复</div>
@@ -19,7 +19,8 @@
 export default {
      name: 'floor',
     props:[
-        "floorItem"
+        "floorItem",
+        "parentLength"
     ]
 };
 </script>
