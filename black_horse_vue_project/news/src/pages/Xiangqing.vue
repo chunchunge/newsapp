@@ -63,9 +63,7 @@ export default {
 
     this.$axios({
       url: "/post/" + this.postId,
-      params: {
-        pageSize: 3
-      },
+     
       method: "get"
     }).then(res => {
       const { data } = res.data;
@@ -86,7 +84,10 @@ export default {
     getComments() {
       this.$axios({
         url: "/post_comment/" + this.postId,
-        method: "get"
+        method: "get",
+         params:{
+                    pageSize: 3
+                },
       }).then(res => {
         const { data } = res.data;
         this.comments = data;
