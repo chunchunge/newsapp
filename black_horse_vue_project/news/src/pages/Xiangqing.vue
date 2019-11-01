@@ -37,7 +37,8 @@
     </div>
     <xiangqingfoot :post="post"
             :isActive="replyActive"
-            :replyObj="replyObj"/>
+            :replyObj="replyObj"
+            @newComment="getComments"/>
   </div>
 </template>
 
