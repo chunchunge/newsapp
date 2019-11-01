@@ -8,7 +8,7 @@
         <span class="iconfont iconnew"></span>
       </div>
     </div>
-    <div class="right reds" v-if="!post.has_follow"  @click="follow">关注</div>
+    <div class="right reds" v-if="!post.has_follow" @click="follow">关注</div>
     <div class="rights" v-else-if="post.has_follow" @click="unfollow">已关注</div>
   </div>
 </template>
@@ -18,31 +18,26 @@ export default {
   props: ["post"],
   methods: {
     follow() {
-    
-      
       // 发送ajax请求关注用户
       this.$axios({
-         url: '/user_follows/'+this.post.user.id,
+        url: "/user_follows/" + this.post.user.id,
         method: "get"
       }).then(res => {
         const { message } = res.data;
-         console.log(message);
-        
+        console.log(message);
+
         if (message == "关注成功") {
           this.post.has_follow = true;
         }
       });
     },
     unfollow() {
-   
-      
       this.$axios({
-         url: '/user_unfollow/'+this.post.user.id,
+        url: "/user_unfollow/" + this.post.user.id,
         method: "get"
       }).then(res => {
         const { message } = res.data;
-        
-        
+
         if (message == "取消关注成功") {
           console.log(message);
           this.post.has_follow = false;
@@ -87,7 +82,7 @@ export default {
   line-height: 4vw;
   padding: 1.111vw 3.333vw;
 }
-.reds{
+.reds {
   background: red;
 }
 </style>

@@ -1,69 +1,66 @@
 <template>
   <div>
-  <editherd labels="我的关注"/>
-   <div class="guanZhu" v-for="item in myFollows" :key="item.id">
-    <img class="left" :src="item.head_img" alt="">
-    <div class="banner">
-      {{item.nickname}}
-      <div class="times">2019-10-10</div>
+    <editherd labels="我的关注" />
+    <div class="guanZhu" v-for="item in myFollows" :key="item.id">
+      <img class="left" :src="item.head_img" alt />
+      <div class="banner">
+        {{item.nickname}}
+        <div class="times">2019-10-10</div>
+      </div>
+      <div class="right" @click="cancelFollow(item.id)">取消关注</div>
     </div>
-    <div class="right"  @click="cancelFollow(item.id)">取消关注</div>
-  </div>
   </div>
 </template>
 
 <script>
-import editherd from "../components/editherd"
+import editherd from "../components/editherd";
 export default {
-    components:{
-        editherd:editherd
-    },
-    data(){
-      return {
-        myFollows:[]
-      }
-    },
-    methods:{
-      loadPage(){
-         // 获取数据
+  components: {
+    editherd: editherd
+  },
+  data() {
+    return {
+      myFollows: []
+    };
+  },
+  methods: {
+    loadPage() {
+      // 获取数据
       this.$axios({
-        url:'/user_follows',
-        method:'get',
-      }).then(res=>{
+        url: "/user_follows",
+        method: "get"
+      }).then(res => {
         // console.log(res.data);
-        
+
         // 将数据存在data里面
-        this.myFollows=res.data.data;
-         // 遍历这个数组
+        this.myFollows = res.data.data;
+        // 遍历这个数组
         this.myFollows.forEach(element => {
           // 如果有头像就拼进去没有的话就强制给他一个
-          if(!element.head_img){
-            element.head_img="../assets/images/capture_20191015202843328.jpg"
-          }else{
-            element.head_img=this.$axios.defaults.baseURL+element.head_img
+          if (!element.head_img) {
+            element.head_img = "../assets/images/capture_20191015202843328.jpg";
+          } else {
+            element.head_img = this.$axios.defaults.baseURL + element.head_img;
           }
         });
-      
-       })
+      });
     },
-    cancelFollow(id){
+    cancelFollow(id) {
       // 拿到id之后发送ajax请求
       this.$axios({
-        url:'/user_unfollow/'+id,
-        method:'get'
-      }).then(res=>{
+        url: "/user_unfollow/" + id,
+        method: "get"
+      }).then(res => {
         // 取关成功然后刷新页面
-          this.loadPage();
-      })
+        this.loadPage();
+      });
     }
-    },
-    // 当页面加载完成之后发送ajax请求
-    mounted(){
-     this.loadPage();
-       
-     
-    }
-}
+  },
+  // 当页面加载完成之后发送ajax请求
+  mounted() {
+    this.loadPage();
+  }
+};
 </script>
 
 <style lang="less" scoped>
@@ -72,7 +69,7 @@ export default {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding:5.556vw 4.167vw;
+  padding: 5.556vw 4.167vw;
   border-bottom: 1px solid #dedede;
   .left {
     width: 13.889vw;
@@ -81,7 +78,7 @@ export default {
     border-radius: 50%;
   }
   .banner {
-    margin-left:4.167vw;
+    margin-left: 4.167vw;
     flex: 1;
     justify-content: space-between;
     .times {
@@ -90,7 +87,7 @@ export default {
       margin-top: 1.389vw;
     }
   }
-  .right{
+  .right {
     width: 22.222vw;
     height: 8.333vw;
     background: #eee;

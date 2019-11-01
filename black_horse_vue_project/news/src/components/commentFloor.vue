@@ -1,10 +1,10 @@
 <template>
   <div>
-      <floor v-if="floorItem.parent" :floorItem="floorItem.parent" :parentLength="parentLength-1"/>
+    <floor v-if="floorItem.parent" :floorItem="floorItem.parent" :parentLength="parentLength-1" />
     <div class="floorWrapper">
       <div class="meta">
         <div class="info">
-         {{parentLength}} : {{floorItem.user.nickname}}
+          {{parentLength}} : {{floorItem.user.nickname}}
           <span class="time">2个小时前</span>
         </div>
         <div class="btnReply">回复</div>
@@ -17,11 +17,8 @@
 <script>
 //  <!-- 当我们的 floorItem 有 parent 的时候,就要递归的调用自己,每次都将拿到的 floorItem.parent 传进去,作为下一个 楼层组件得 floorItem -->
 export default {
-     name: 'floor',
-    props:[
-        "floorItem",
-        "parentLength"
-    ]
+  name: "floor",
+  props: ["floorItem", "parentLength"]
 };
 </script>
 

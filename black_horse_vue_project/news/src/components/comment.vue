@@ -9,7 +9,11 @@
         </div>
         <div class="btnReply" @click="reply">回复</div>
       </div>
-      <commentFloor v-if="commentItem.parent" :floorItem="commentItem.parent" :parentLength="parentLength"/>
+      <commentFloor
+        v-if="commentItem.parent"
+        :floorItem="commentItem.parent"
+        :parentLength="parentLength"
+      />
       <div class="commentContent">{{commentItem.content}}</div>
     </div>
   </div>
@@ -23,25 +27,25 @@ export default {
   },
 
   props: ["commentItem"],
-  data(){
-      return{
-          parentLength:this.countParent(0,this.commentItem)
-      }
+  data() {
+    return {
+      parentLength: this.countParent(0, this.commentItem)
+    };
   },
-  methods:{
-      countParent(num,obj){
-          if(obj.parent){
-              return this.countParent(num+1,obj.parent);
-          }else{
-              return num;
-          }
-      },
-      reply(){
-        // 点击的时候将数据传给子组件
-        this.$emit('reply',{
-          id:this.commentItem.id
-        })
+  methods: {
+    countParent(num, obj) {
+      if (obj.parent) {
+        return this.countParent(num + 1, obj.parent);
+      } else {
+        return num;
       }
+    },
+    reply() {
+      // 点击的时候将数据传给子组件
+      this.$emit("reply", {
+        id: this.commentItem.id
+      });
+    }
   }
 };
 </script>

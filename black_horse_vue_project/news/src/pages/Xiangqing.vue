@@ -31,14 +31,16 @@
       <h2 class="litle">精彩跟帖</h2>
       <div class="tishi" v-if="comments.length==0">暂无跟帖，抢占沙发</div>
       <div class="comment" v-else>
-        <comment v-for="(item,index) in comments" :key="index" :commentItem="item" @reply="reply"/>
+        <comment v-for="(item,index) in comments" :key="index" :commentItem="item" @reply="reply" />
         <div class="btnMoreComments" @click="toMoreComments">更多跟帖</div>
       </div>
     </div>
-    <xiangqingfoot :post="post"
-            :isActive="replyActive"
-            :replyObj="replyObj"
-            @newComment="getComments"/>
+    <xiangqingfoot
+      :post="post"
+      :isActive="replyActive"
+      :replyObj="replyObj"
+      @newComment="getComments"
+    />
   </div>
 </template>
 
@@ -57,8 +59,8 @@ export default {
       postId: this.$route.params.id,
       post: {},
       comments: [],
-      replyActive:false,
-      replyObj:{}
+      replyActive: false,
+      replyObj: {}
     };
   },
   mounted() {
@@ -68,7 +70,7 @@ export default {
 
     this.$axios({
       url: "/post/" + this.postId,
-     
+
       method: "get"
     }).then(res => {
       const { data } = res.data;
@@ -78,9 +80,9 @@ export default {
     this.getComments();
   },
   methods: {
-    reply(replyObj){
-      this.replyObj=replyObj;
-      this.replyActive=true;
+    reply(replyObj) {
+      this.replyObj = replyObj;
+      this.replyActive = true;
     },
     toMoreComments() {
       this.$router.push({
@@ -94,9 +96,9 @@ export default {
       this.$axios({
         url: "/post_comment/" + this.postId,
         method: "get",
-         params:{
-                    pageSize: 3
-                },
+        params: {
+          pageSize: 3
+        }
       }).then(res => {
         const { data } = res.data;
         this.comments = data;

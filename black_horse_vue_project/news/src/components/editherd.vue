@@ -1,18 +1,15 @@
 <template>
   <div>
     <div class="heard">
-      <span class="iconfont iconjiantou2"  @click="$router.back()"></span>
+      <span class="iconfont iconjiantou2" @click="$router.back()"></span>
       <div class="tital">{{labels}}</div>
     </div>
-    
   </div>
 </template>
 
 <script>
 export default {
-  props:[
-    'labels'
-  ]
+  props: ["labels"]
 };
 </script>
 
@@ -31,5 +28,4 @@ export default {
     margin-right: 5.556vw;
   }
 }
-
 </style>

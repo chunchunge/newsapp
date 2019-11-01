@@ -8,7 +8,6 @@
     :placeholder="placeholder"
     @input="dataChange"
     @blur="showTips"
-    
   />
 </template>
 
@@ -33,12 +32,11 @@ export default {
 
       this.$emit("input", $event.target.value);
     },
-    showTips(){
-        if(!this.isOk){
-            // console.log(this.err_message);
-             this.$toast.fail(this.err_message)
-        }
-        
+    showTips() {
+      if (!this.isOk) {
+        // console.log(this.err_message);
+        this.$toast.fail(this.err_message);
+      }
     }
   }
 };

@@ -19,18 +19,18 @@ export default {
   components: {
     editherd: editherd
   },
-  data(){
-    return{
-      commentList:[]
-    }
+  data() {
+    return {
+      commentList: []
+    };
   },
-  mounted(){
+  mounted() {
     this.$axios({
-      url:'/user_comments',
-      method:'get'
-    }).then(res=>{
-      this.commentList=res.data.data
-    })
+      url: "/user_comments",
+      method: "get"
+    }).then(res => {
+      this.commentList = res.data.data;
+    });
   }
 };
 </script>

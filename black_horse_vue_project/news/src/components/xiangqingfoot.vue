@@ -64,7 +64,7 @@ export default {
         this.comment = "";
         this.isFocus = false;
         // 请求发送完毕,为了更新页面数据,需要向父组件触发一个自定义事件
-                this.$emit('newComment');
+        this.$emit("newComment");
       });
     },
     showArea() {

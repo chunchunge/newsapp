@@ -67,20 +67,19 @@ export default {
     };
   },
   methods: {
-    
     // 封装ajax请求
     loadPage() {
       this.$axios({
         // url后面需要带上用户的id
         url: "/user/" + localStorage.getItem("user_id"),
-        method: "get",
-       
+        method: "get"
       }).then(res => {
         // 将请求得到的数据保存在data里面
         this.profile = res.data.data;
         if (!this.profile.head_img) {
           // 如果数据库没有头像,强行设置一个默认的
-          this.profile.head_img = "../assets/images/capture_20191015202843328.jpg";
+          this.profile.head_img =
+            "../assets/images/capture_20191015202843328.jpg";
         } else {
           // 如果有头像数据,我们还要拼接数据库基准路径才能获取到头像真正地址
           this.profile.head_img =
@@ -104,16 +103,14 @@ export default {
       this.$axios({
         url: "/upload",
         method: "post",
-        data:data,
-        
+        data: data
       }).then(res => {
         // console.log(res.data);
-        
+
         //调用前面的函数修改url
         this.editProfile({
-          head_img:res.data.data.url
-        })
-        
+          head_img: res.data.data.url
+        });
       });
     },
     editProfile(newData) {
@@ -121,7 +118,7 @@ export default {
       this.$axios({
         url: "/user_update/" + localStorage.getItem("user_id"),
         method: "post",
-       
+
         data: newData
       }).then(res => {
         // 刷新页面

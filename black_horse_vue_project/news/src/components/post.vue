@@ -41,7 +41,7 @@ export default {
     toDetail() {
       // 点点击的时候跳转到详情页并把点击的新闻的id带到$router上
       this.$router.push({
-           name: 'xiangqingpage',
+        name: "xiangqingpage",
         params: {
           id: this.post.id
         }
