@@ -9,11 +9,11 @@
         </div>
         <div class="btnReply" @click="reply">回复</div>
       </div>
-      <commentFloor
-        v-if="commentItem.parent"
-        :floorItem="commentItem.parent"
-        :parentLength="parentLength"
-      />
+     <commentFloor 
+            v-if="commentItem.parent" 
+            :floorItem="commentItem.parent" 
+            :parentLength="parentLengh"
+            @reply="reply"/>
       <div class="commentContent">{{commentItem.content}}</div>
     </div>
   </div>
@@ -29,7 +29,7 @@ export default {
   props: ["commentItem"],
   data() {
     return {
-      parentLength: this.countParent(0, this.commentItem)
+      parentLengh: this.countParent(0, this.commentItem)
     };
   },
   methods: {
@@ -40,11 +40,23 @@ export default {
         return num;
       }
     },
-    reply() {
-      // 点击的时候将数据传给子组件
-      this.$emit("reply", {
-        id: this.commentItem.id
-      });
+   reply(data) {
+
+            // 如果是这个组件自己触发的事件
+            // 那么 data 就是事件对象,不存在 id
+            // 如果这个事件是从楼层里面传出来的
+            // 就会带上 data.id
+
+            // 判断如果有底层传出来的 data.id
+            // 我就原封 不动往外传,
+            // 不然,我就穿自己的 id
+            if (data.id) {
+                this.$emit('reply', data)
+            }else {
+                this.$emit('reply', {
+                    id: this.commentItem.id
+                })
+            }
     }
   }
 };
