@@ -14,6 +14,7 @@
     <div class="suggestion" v-else>
       <div class="history">
         <h2>历史记录</h2>
+        <span v-for="(item, index) in historyList" :key="index" @click="searchByWord(item)">{{item}}</span>
       </div>
       <div class="hot">
         <h2>热门搜索</h2>
@@ -33,7 +34,10 @@ export default {
     return {
       searchText: "",
       resultList: [],
-      hotList: []
+      hotList: [],
+      historyList: localStorage.getItem("searchHistory")
+        ? JSON.parse(localStorage.getItem("searchHistory"))
+        : []
     };
   },
   watch: {
@@ -46,12 +50,21 @@ export default {
         this.resultList = [];
       }
     }
+    ,
+    historyList() {
+      // 将这个历史记录数组放入 localStorage 里面
+      // console.log(this.historyList);
+      // 所以要将这个额数据先转换为 JSON.stringify 字符串,再储存
+      const strHistory = JSON.stringify(this.historyList);
+      localStorage.setItem("searchHistory", strHistory);
+    }
+
   },
   mounted() {
     this.getHotList();
   },
   methods: {
-    seatchByWord(item) {
+    searchByWord(item) {
       this.searchText = item;
       this.search();
     },
@@ -77,6 +90,11 @@ export default {
       }).then(res => {
         const { data } = res.data;
         this.resultList = data;
+        // 这里搜索成功了我们应该讲搜索记录存放如 historyList
+        // 先判断这个词是否已经存在
+        if (this.historyList.indexOf(this.searchText) < 0) {
+          this.historyList.push(this.searchText);
+        }
       });
     }
   }
@@ -104,5 +122,14 @@ export default {
     border: none;
     outline: none;
   }
+}
+.history,
+.hot {
+  padding: 0 2.778vw;
+}
+.history {
+  min-height: 55.556vw;
+  border-bottom: 1px solid #eee;
+  margin-bottom: 5.556vw;
 }
 </style>
