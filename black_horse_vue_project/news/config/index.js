@@ -43,7 +43,7 @@ module.exports = {
     // Paths
     assetsRoot: path.resolve(__dirname, '../dist'),
     assetsSubDirectory: 'static',
-    assetsPublicPath: 'black_horse_vue_project/news',
+    assetsPublicPath: 'newsapp/black_horse_vue_project/news/',
 
     /**
      * Source Maps
