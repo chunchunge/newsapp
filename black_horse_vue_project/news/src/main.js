@@ -60,7 +60,7 @@ if(message=="用户信息验证失败"){
 Vue.prototype.$axios = axios;
 
 //设置默认的 api 域名
-axios.defaults.baseURL = "http://localhost:3000"
+
 Vue.config.productionTip = false
 
 /* eslint-disable no-new */
