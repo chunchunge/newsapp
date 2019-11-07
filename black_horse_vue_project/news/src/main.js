@@ -32,7 +32,7 @@ router.beforeEach((to,from,next)=>{
  
 });
 // 错误拦截
-axios.defaults.baseUrl="http://127.0.0.1:3000"
+axios.defaults.baseUrl="http://111.230.181.206:3000"
 import {Toast} from 'vant';
 // 请求拦截
 axios.interceptors.request.use((config)=>{
